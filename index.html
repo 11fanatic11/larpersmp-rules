@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LarperSMP Rules</title>
+<meta name="description" content="The official rules and playing guidelines for the LarperSMP Minecraft server.">
+
+<!-- Favicon (uses the server logo) -->
+<link rel="icon" href="logo.png">
+
+<!-- Link embed / social preview (shows when the link is posted in Discord). -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rules.larpersmp.xyz/">
+<meta property="og:title" content="LarperSMP Rules">
+<meta property="og:description" content="The official rules and playing guidelines for the LarperSMP Minecraft server.">
+<meta property="og:image" content="https://rules.larpersmp.xyz/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#3312e8">
+<style>
+  /* Palette sampled from logo.png:
+     background gradient  #c021f6 (magenta) -> #3312e8 (indigo) -> #171ba3 (deep blue)
+     wordmark             #8d6acc / #7a5bb5 lilac-violet, #3a2a54 shaded side, black outline
+     "SMP"                #7681fe (periwinkle) -> magenta */
+  :root {
+    --bg:          #0d0720;
+    --bg-2:        #150b34;
+    --panel:       #1b0f45;
+    --panel-2:     #22145a;
+    --border:      #3d2a8f;
+    --accent:      #a98bf0;
+    --accent-2:    #cdbcff;
+    --accent-deep: #7a5bb5;
+    --shade:       #3a2a54;
+    --magenta:     #c021f6;
+    --indigo:      #3312e8;
+    --peri:        #7681fe;
+    --text:        #ece6ff;
+    --muted:       #b0a3da;
+    --channel-bg:  #3b3d63;
+    --channel-tx:  #c9cdfb;
+    --danger:      #e04a4a;
+    --danger-bg:   #3a1530;
+    --green:       #3ba55d;
+    --green-bg:    #143027;
+    --code-bg:     #0a0518;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(900px 520px at 8% -8%, rgba(192, 33, 246, .30) 0%, transparent 70%),
+      radial-gradient(900px 520px at 96% -4%, rgba(51, 18, 232, .38) 0%, transparent 70%),
+      var(--bg);
+    background-repeat: no-repeat;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+    min-height: 100vh;
+  }
+
+  /* subtle pixel grid texture */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+    background-size: 16px 16px;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header {
+    text-align: center;
+    padding: 40px 10px 20px;
+  }
+  .logo-banner {
+    width: 100%;
+    max-width: 620px;
+    aspect-ratio: 620 / 216;
+    margin: 0 auto;
+    overflow: hidden;
+    border: 3px solid var(--accent-deep);
+    border-radius: 12px;
+    box-shadow:
+      0 6px 0 rgba(0,0,0,.45),
+      0 0 40px rgba(118, 129, 254, .25),
+      inset 0 0 0 2px rgba(255,255,255,.12);
+  }
+  .logo-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 50%;
+    display: block;
+  }
+  .tagline {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 14px;
+    letter-spacing: .5px;
+  }
+
+  /* ---------- Section cards ---------- */
+  .section {
+    background: linear-gradient(180deg, var(--panel) 0%, var(--bg-2) 100%);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px 26px 26px;
+    margin: 26px 0;
+    box-shadow: 0 3px 0 rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.04);
+    counter-reset: rule;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 18px;
+    color: var(--accent-2);
+    margin: 4px 0 18px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+    text-shadow: 0 2px 0 #000;
+  }
+  .section-title .dash { color: var(--peri); }
+
+  /* ---------- Sub-section headings ---------- */
+  .subsection-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+    color: var(--accent);
+    margin: 26px 0 12px;
+  }
+  .subsection-title:first-of-type { margin-top: 6px; }
+  .subsection-title::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    background: linear-gradient(180deg, var(--peri), var(--magenta));
+    transform: rotate(45deg);
+    box-shadow: 0 0 0 1px rgba(0,0,0,.5);
+  }
+  .subsection-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ---------- Rules list ---------- */
+  ol.rules {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ol.rules > li {
+    counter-increment: rule;
+    position: relative;
+    padding: 14px 14px 14px 54px;
+    margin: 8px 0;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent-deep);
+    border-radius: 6px;
+    transition: transform .08s ease, border-color .15s ease;
+    cursor: default;
+  }
+  ol.rules > li:hover,
+  ol.rules > li:focus-visible {
+    transform: translateX(3px);
+    border-left-color: var(--accent-2);
+  }
+  ol.rules > li:focus-visible { outline: 2px solid var(--peri); outline-offset: 2px; }
+  ol.rules > li::before {
+    content: counter(rule);
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, var(--accent-2), var(--accent-deep));
+    color: #14082e;
+    font-weight: 800;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0 2px 0 var(--shade), 0 0 0 1px #000;
+  }
+  ol.rules > li.danger {
+    border-left-color: var(--danger);
+    background: linear-gradient(180deg, var(--danger-bg), var(--panel-2));
+  }
+  ol.rules > li.danger::before {
+    background: linear-gradient(180deg, #ff7a7a, var(--danger));
+    color: #3a0d0d;
+    box-shadow: 0 2px 0 #7a1c1c, 0 0 0 1px #000;
+  }
+
+  /* Hover-to-reveal description (opens after a 1s hover, or on click/tap/Enter) */
+  .rule-desc {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 1px solid transparent;
+    color: var(--muted);
+    font-size: 13.5px;
+    line-height: 1.5;
+    transition:
+      max-height .45s ease,
+      opacity .4s ease,
+      margin-top .4s ease,
+      padding-top .4s ease;
+  }
+  ol.rules > li.desc-open .rule-desc {
+    max-height: 320px;
+    opacity: 1;
+    margin-top: 11px;
+    padding-top: 11px;
+    border-top: 1px solid var(--border);
+  }
+  .rule-desc::before {
+    content: "ℹ";
+    color: var(--peri);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+
+  /* ---------- Allowed list ---------- */
+  ul.allowed {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul.allowed li {
+    padding: 10px 12px 10px 40px;
+    margin: 7px 0;
+    position: relative;
+    background: linear-gradient(180deg, var(--green-bg), var(--panel-2));
+    border: 1px solid #2e5a45;
+    border-left: 4px solid var(--green);
+    border-radius: 6px;
+  }
+  ul.allowed li::before {
+    content: "✔";
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--green);
+    font-weight: 900;
+    font-size: 15px;
+  }
+
+  /* ---------- Inline formatting ---------- */
+  strong { color: #fff; font-weight: 800; }
+
+  code {
+    font-family: "Consolas", "SF Mono", Menlo, monospace;
+    background: var(--code-bg);
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-size: 90%;
+    color: var(--accent-2);
+  }
+
+  .channel {
+    background: var(--channel-bg);
+    color: var(--channel-tx);
+    border-radius: 4px;
+    padding: 1px 6px 2px;
+    font-weight: 600;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .channel::before { content: "#"; opacity: .7; margin-right: 1px; }
+
+  /* Spoiler — click to reveal */
+  .spoiler {
+    background: #05020d;
+    color: transparent;
+    border-radius: 4px;
+    padding: 1px 5px;
+    cursor: pointer;
+    user-select: none;
+    transition: background .15s, color .15s;
+  }
+  .spoiler:hover { background: #120a2a; }
+  .spoiler.revealed {
+    background: rgba(255,255,255,.08);
+    color: var(--text);
+    cursor: text;
+    user-select: text;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ol.rules > li, .rule-desc, .appeal-panel { transition: none; }
+  }
+
+  /* ---------- Subject-to-change notice section ---------- */
+  .notice-section {
+    background: linear-gradient(180deg, #2a1478 0%, #170b46 100%);
+    border-color: #5a3fd0;
+    border-left: 4px solid var(--magenta);
+    text-align: center;
+  }
+  .notice-section .section-title {
+    justify-content: center;
+    color: var(--accent-2);
+    border-bottom: none;
+    margin-bottom: 8px;
+    padding-bottom: 0;
+  }
+  .notice-section p {
+    margin: 0;
+    color: var(--text);
+    font-size: 14.5px;
+    font-style: italic;
+  }
+
+  /* ---------- Ban appeal ---------- */
+  .appeal-section { text-align: center; }
+  .appeal-btn {
+    font: inherit;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: .5px;
+    color: #3a0d0d;
+    background: linear-gradient(180deg, #ff7a7a, var(--danger));
+    border: none;
+    border-radius: 8px;
+    padding: 13px 26px;
+    cursor: pointer;
+    box-shadow: 0 3px 0 #7a1c1c;
+    transition: transform .08s ease, box-shadow .08s ease, filter .15s ease;
+  }
+  .appeal-btn:hover { filter: brightness(1.07); }
+  .appeal-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #7a1c1c; }
+  .appeal-btn[aria-expanded="true"] { box-shadow: 0 1px 0 #7a1c1c; transform: translateY(2px); }
+
+  .appeal-panel {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0;
+    text-align: left;
+    transition: max-height .45s ease, opacity .4s ease, margin-top .4s ease;
+  }
+  .appeal-panel.open {
+    max-height: 480px;
+    opacity: 1;
+    margin-top: 18px;
+  }
+  .appeal-panel .appeal-inner {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--danger);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .appeal-panel p {
+    margin: 0;
+    color: var(--text);
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12.5px;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+  footer .brand { color: var(--accent-2); font-weight: 700; }
+
+  @media (max-width: 560px) {
+    .section { padding: 18px 16px 20px; }
+    ol.rules > li { padding: 12px 12px 12px 50px; }
+    .section-title { font-size: 16px; letter-spacing: 1px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="logo-banner"><img src="logo.png" alt="LarperSMP"></div>
+    <div class="tagline">Server Rules &amp; Guidelines</div>
+  </header>
+
+  <!-- ================= IN-GAME RULES ================= -->
+  <section class="section">
+    <h2 class="section-title"><span class="dash">◆</span> In-Game Rules <span class="dash">◆</span></h2>
+
+    <ol class="rules">
+      <li>Never under any circumstances use a hack client, X-Ray, seed crackers, or other forms of cheating.
+        <div class="rule-desc">Any third-party client or mod that gives you an unfair edge (seeing through blocks, auto-generating ore locations, or cracking the world seed) is cheating. Stick to vanilla and staff-approved quality-of-life mods only.</div>
+      </li>
+
+      <li>No auto-totem, auto-clickers, macros, or automation mods such as Baritone. Play with your own hands.
+        <div class="rule-desc">Anything that automates your actions for you is banned. That covers auto-totem modules, auto-clickers, keybind macros, auto-fishing, and pathfinding or auto-mining mods such as Baritone. Staff will catch what automated checks miss, and using one in a fight is treated the same as any other cheat.</div>
+      </li>
+
+      <li>Do not use chat, voice chat, or <code>/msg</code> (<code>/w</code>, <code>/tell</code>, <code>/r</code>, <code>/reply</code>) to hate against someone for reasons related to their race, sexuality, or identity. This rule is also broken if I, or another admin/moderator decides you have used chat inappropriately.
+        <div class="rule-desc">Keep every channel (public chat, voice, and private messages) respectful. Slurs and harassment targeting who someone is are never tolerated, and staff have the final say on what counts as inappropriate.</div>
+      </li>
+
+      <li>Do not share anyone's real-life personal information without their consent.
+        <div class="rule-desc">Posting or threatening to post someone's real name, address, socials, or any private details (doxxing) is never allowed, whether in game, in voice, or in DMs. This applies even if the information was shared with you willingly in the past.</div>
+      </li>
+
+      <li>Do not post malicious links, IP grabbers, or anything built to harm another player's device or account.
+        <div class="rule-desc">Sharing IP loggers (like Grabify), phishing links, malware, or any link meant to steal information or damage someone's device or account is an instant, permanent ban. If you are not certain a link is safe, don't post it.</div>
+      </li>
+
+      <li>No advertising other servers, Discords, or communities.
+        <div class="rule-desc">Don't post other server IPs, Discord invites, or promotions in chat, DMs, or voice. Talking about other servers casually is fine, actively trying to pull players away from LarperSMP is not.</div>
+      </li>
+
+      <li>Do not impersonate staff, admins, or other players.
+        <div class="rule-desc">Pretending to be an admin, moderator, or another player to trick, scam, or mislead people is not allowed. Staff will never ask for your password or account details, so treat anyone who does as a scammer. Larping as your own approved YouTuber is the whole point of the server and is not impersonation.</div>
+      </li>
+
+      <li><strong>Combat Logging:</strong> You will be permanently banned if you are caught combat logging repeatedly.
+        <div class="rule-desc">Disconnecting to escape a fight is combat logging. Slip up once and you'll be warned; do it again and again, and the ban is permanent. Finish the fight or accept the loss.</div>
+      </li>
+
+      <li>Do not evade bans with alternate accounts, and do not use alts to gain an unfair advantage.
+        <div class="rule-desc">If you are banned, that ban applies to you, not just one account. Hopping onto an alt to get back on the server extends the ban. Alts used to stack extra kits, dodge PvP consequences, or gang up on someone in a fight are not allowed either.</div>
+      </li>
+
+      <li class="danger"><strong>Game Breaking Exploits:</strong> Do not use game breaking exploits that may lag or disrupt the server, give you access to unlimited amounts of items, or operator/admin access. (<strong>BREAKING THIS WILL RESULT IN AN IMMEDIATE PERMANENT BAN</strong>)
+        <div class="rule-desc">This covers anything that crashes or lags the server, duplicates items infinitely, or hands you staff-level permissions. There are no warnings and no second chances for this one. The ban is instant.</div>
+      </li>
+
+      <li>If you find a new dupe or exploit, report it instead of abusing it.
+        <div class="rule-desc">Tripwire and string dupes are fine (see What's Allowed), but if you discover a new item dupe or any exploit that isn't already permitted, report it in Discord instead of using or sharing it. Abusing an unreported exploit falls under the game breaking exploits rule above.</div>
+      </li>
+
+      <li><strong>No base griefing or stealing:</strong> Do not grief or steal from other players' bases.
+        <div class="rule-desc">Breaking, burning, blowing up or otherwise wrecking someone else's base or builds is not allowed, and neither is taking items from their chests, barrels, shulkers or anything else stored there. Loot that drops when you kill a player in a fight is fair game. Fight the player, not their house.</div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ================= LARPING & SMPs ================= -->
+  <section class="section">
+    <h2 class="section-title"><span class="dash">◆</span> Larping &amp; SMPs <span class="dash">◆</span></h2>
+
+    <h3 class="subsection-title">Your Larp</h3>
+    <ol class="rules">
+      <li>You larp as the Minecraft YouTuber you picked in your application, under your SMP's rules below.
+        <div class="rule-desc">Your YouTuber needs 100k+ subscribers and a unique skill, trait or ability that few other players have (for example Wemmbu for Mace PvP, or TheobaldTheBird for Cart PvP). Staff set your larp name and kit for you once your application is approved, and you play to your YouTuber's strengths.</div>
+      </li>
+    </ol>
+
+    <h3 class="subsection-title">Your SMP</h3>
+    <ol class="rules">
+      <li><strong>Unstable SMP:</strong> Kicked on death with a Wither spawn sound on death. Dying 3 times in one day results in a 3 day ban.
+        <div class="rule-desc">Every death plays the Wither spawn sound and kicks you from the server. Die more than 3 times within a day and you are banned for 3 days.</div>
+      </li>
+
+      <li><strong>Lifesteal SMP:</strong> Can gain and lose hearts from/to other players. If you run out of hearts, you are banned for 3 days.
+        <div class="rule-desc">Killing another player steals one of their hearts, and losing a fight to another player costs you one. Reach zero hearts and you are banned for 3 days (or revived early by another Lifesteal player).</div>
+      </li>
+
+      <li><strong>Strength SMP:</strong> Can gain up to +5 strength, cannot use strength potions.
+        <div class="rule-desc">Strength is earned by killing players and adds attack damage, up to +5. Strength potions are off limits to Strength SMP players.</div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ================= PLAYING GUIDELINES ================= -->
+  <section class="section">
+    <h2 class="section-title"><span class="dash">◆</span> Playing Guidelines <span class="dash">◆</span></h2>
+
+    <h3 class="subsection-title">Teams</h3>
+    <ol class="rules">
+      <li><strong>Max team size:</strong> 5 players.
+        <div class="rule-desc">A team can have at most 5 members. Bigger groups make fights one-sided for everyone else, so keep your team at 5 or fewer.</div>
+      </li>
+    </ol>
+
+    <h3 class="subsection-title">Inventory</h3>
+    <ol class="rules">
+      <li><strong>Kit rules:</strong> Max 2 totems of undying. Maximum TNT Minecarts: 8. Max E-Gaps: 2.
+        <div class="rule-desc">Combat kits are capped to keep fights fair. At any time you may carry at most 2 totems of undying, 8 TNT minecarts, and 2 enchanted golden apples. Bringing more than the limit into a fight breaks this rule.</div>
+      </li>
+    </ol>
+
+    <h3 class="subsection-title">Play Styles</h3>
+    <ol class="rules">
+      <li>No naked killing.
+        <div class="rule-desc">Don't kill players who have no armour or gear equipped. Give them a fair chance to arm up, or leave them alone; hunting the defenceless isn't the vibe.</div>
+      </li>
+
+      <li>No water fighting. Fight on land <strong>only</strong>.
+        <div class="rule-desc">All fights must happen on solid ground. Luring opponents into water to cancel their knockback and slow their movement is off-limits. Keep it fair on land.</div>
+      </li>
+
+      <li><strong>No restocking mid-fight:</strong> Do not grab gear or loot from chests, shulker boxes or your ender chest during a fight.
+        <div class="rule-desc">Once a fight has started, you can't run to storage to resupply. That covers normal chests, barrels, shulker boxes and your ender chest. Stock up before you fight, not during it.</div>
+      </li>
+    </ol>
+
+    <h3 class="subsection-title">Disallowed Items</h3>
+    <ol class="rules">
+      <li>Do not use End Crystals or Respawn Anchors in PvP, or traps.
+        <div class="rule-desc">End crystals and respawn anchors deal huge burst damage and are banned from all combat and trap setups. Keep them out of PvP entirely: no crystal PvP, no anchor traps.</div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ================= WHAT'S ALLOWED ================= -->
+  <section class="section">
+    <h2 class="section-title">✅ What's Allowed</h2>
+    <ul class="allowed">
+      <li>Griefing spawn</li>
+      <li>PvP</li>
+      <li>Dupers (like tripwire / string dupers), but <strong>NOT ITEM DUPERS</strong></li>
+    </ul>
+  </section>
+
+  <!-- ================= SUBJECT TO CHANGE ================= -->
+  <section class="section notice-section">
+    <h2 class="section-title">⚠ Subject to Change</h2>
+    <p>These rules are always subject to change, and admins reserve the right to ban you for any reason we deem fit.</p>
+  </section>
+
+  <!-- ================= BAN APPEAL ================= -->
+  <section class="section appeal-section">
+    <button class="appeal-btn" id="appealBtn" type="button" aria-expanded="false" aria-controls="appealPanel">I've been falsely banned!</button>
+    <div class="appeal-panel" id="appealPanel">
+      <div class="appeal-inner">
+        <p>Think your ban was a mistake? You can appeal it. Head to the Discord, open a <strong>Ban Appeal</strong> with the staff team, and follow the prompts. Staff will review your appeal and get back to you. <strong>Appeals submitted without any evidence to back them up will be denied</strong>, so make sure to include proof (screenshots, clips, etc.) that your ban was a mistake.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="brand">LARPER SMP</span> · Rules last updated October 20, 2026 · Tip: click the blacked-out <span class="spoiler">spoilers</span> to reveal them
+  </footer>
+
+</div>
+
+<script>
+  // Click blacked-out spoilers to reveal them
+  document.querySelectorAll('.spoiler').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      el.classList.add('revealed');
+      e.stopPropagation();
+    });
+  });
+
+  // Rule descriptions: hover a rule for 1s to smoothly open it (leaving closes it).
+  // Click / tap / Enter / Space also toggles it, so it works on touch and keyboard.
+  document.querySelectorAll('ol.rules > li').forEach(function (li) {
+    if (!li.querySelector('.rule-desc')) return;
+    li.setAttribute('tabindex', '0');
+    var timer = null;
+    li.addEventListener('mouseenter', function () {
+      timer = setTimeout(function () { li.classList.add('desc-open'); }, 1000);
+    });
+    li.addEventListener('mouseleave', function () {
+      clearTimeout(timer);
+      li.classList.remove('desc-open');
+    });
+    li.addEventListener('click', function (e) {
+      if (e.target.closest('a')) return;
+      clearTimeout(timer);
+      li.classList.toggle('desc-open');
+    });
+    li.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        li.classList.toggle('desc-open');
+      }
+    });
+  });
+
+  // Toggle the ban-appeal explanation
+  (function () {
+    var btn = document.getElementById('appealBtn');
+    var panel = document.getElementById('appealPanel');
+    if (!btn || !panel) return;
+    btn.addEventListener('click', function () {
+      var open = panel.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  })();
+</script>
+</body>
+</html>
